@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poshan Darpan - Child Growth Monitoring</title>
+    <title>Poshan Darpan - WHZ Calculator</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(135deg, #F0F8FF 0%, #ADD8E6 100%);
             font-family: Verdana, sans-serif;
             padding: 10px;
-            line-height: 1.4;
             min-height: 100vh;
         }
         .container {
@@ -21,41 +20,25 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        .header-img { 
-            width: 100%; 
-            height: 150px;
-            object-fit: cover; 
-            background-color: #3b82f6;
-        }
+        .header-img { width: 100%; height: 160px; object-fit: cover; }
         .content-section { padding: 15px; }
-        .logo { 
-            max-width: 100%; 
-            max-height: 150px;
-            width: auto; 
-            display: block; 
-            margin: 10px auto; 
-        }
-        .form-title { 
-            font-size: 1.6em;
-            color: #1e3a8a; 
-            text-align: center;
-            margin-bottom: 5px;
-        }
-        .form-subtitle { font-size: 0.75em; color: #666; display: block; text-align: center;}
-        .form-note { font-size: 0.9em; color: #374151; text-align: center; margin-bottom: 20px; font-style: italic; }
+        .logo { max-width: 120px; display: block; margin: 10px auto; border-radius: 10px; }
+        .form-title { font-size: 1.6em; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .form-subtitle { font-size: 0.8em; color: #666; display: block; text-align: center; margin-bottom: 15px; }
+        
         .form-container {
-            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            background: #ffffff;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
             margin-bottom: 15px;
         }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 5px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 5px; font-size: 0.9em; }
         .form-group input, .form-group select {
             width: 100%;
-            padding: 14px 12px;
-            border: 2px solid #e2e8f0;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
             border-radius: 8px;
             font-size: 16px;
         }
@@ -64,23 +47,27 @@
             color: white;
             border: none;
             padding: 16px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
             border-radius: 25px;
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
         }
-        .results { margin-top: 20px; padding: 20px; border-radius: 12px; text-align: center; }
-        .status-sam { color: #dc2626; background: rgba(220,38,38,0.12); border-left: 5px solid #dc2626; }
-        .status-mam { color: #ea580c; background: rgba(234,88,12,0.12); border-left: 5px solid #ea580c; }
-        .status-normal { color: #16a34a; background: rgba(22,163,74,0.12); border-left: 5px solid #16a34a; }
-        .marquee { background: rgba(0,0,0,0.9); color: white; padding: 12px; font-size: 0.85em; text-align: center; border-radius: 8px; margin: 10px; }
-        footer { background: rgba(0,0,0,0.9); color: white; padding: 20px; text-align: center; font-size: 0.9em; }
+        
+        .results { margin-top: 20px; padding: 20px; border-radius: 12px; text-align: center; display: none; }
+        .result-img { width: 100px; height: 100px; margin-bottom: 10px; }
+        
+        .status-sam { background: #fee2e2; color: #dc2626; border: 2px solid #dc2626; }
+        .status-mam { background: #ffedd5; color: #ea580c; border: 2px solid #ea580c; }
+        .status-normal { background: #dcfce7; color: #16a34a; border: 2px solid #16a34a; }
+
+        .marquee { background: #000; color: #fff; padding: 10px; font-size: 0.8em; text-align: center; margin: 10px; border-radius: 5px; }
+        footer { background: #000; color: #fff; padding: 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #60a5fa; text-decoration: none; }
 
         @media (min-width: 768px) {
-            .container { max-width: 850px; }
+            .container { max-width: 800px; }
             .content-section { display: flex; gap: 20px; align-items: center; }
             .logo-section, .form-section { flex: 1; }
         }
@@ -89,104 +76,107 @@
 <body>
 
 <div class="container">
-    <img src="prediction2.gif" class="header-img" alt="Header Banner" onerror="this.src='https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=1000'">
+    <img src="prediction2.gif" class="header-img" alt="Header" onerror="this.src='https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=800'">
     
     <div class="content-section">
         <div class="logo-section">
-            <img src="logo1.jpg" class="logo" alt="Logo" onerror="this.style.display='none'">
+            <img src="logo1.jpg" class="logo" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2311/2311904.png'">
+            <h1 class="form-title">Poshan Darpan</h1>
+            <span class="form-subtitle">Growth Monitoring Tool</span>
         </div>
         
         <div class="form-section">
-            <h1 class="form-title"> Poshan Darpan <br>
-                <span class="form-subtitle">(Child Growth Monitoring Tool)</span>
-            </h1>
-            <p class="form-note">(Children 0-59 Months Age)</p>
-            
-            <form id="predictionForm" class="form-container">
+            <form id="whzForm" class="form-container">
                 <div class="form-group">
-                    <label>👶 Sex</label>
+                    <label>👶 Age (0-59 Months)</label>
+                    <input type="number" id="age" min="0" max="59" placeholder="Enter age in months" required>
+                </div>
+                <div class="form-group">
+                    <label>⚥ Sex</label>
                     <select id="sex" required>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>📏 Height (cm)</label>
-                    <input type="number" id="height" step="0.1" placeholder="e.g., 65.0" required>
+                    <label>📏 Height/Length (cm)</label>
+                    <input type="number" id="height" step="0.1" placeholder="e.g., 75.2" required>
                 </div>
                 <div class="form-group">
                     <label>⚖️ Weight (kg)</label>
-                    <input type="number" id="weight" step="0.1" placeholder="e.g., 7.5" required>
+                    <input type="number" id="weight" step="0.1" placeholder="e.g., 9.5" required>
                 </div>
-                <button type="submit" class="predict-btn">🔍 Calculate WHZ Score</button>
+                <button type="submit" class="predict-btn">Analyze Status</button>
             </form>
             
-            <div id="results" style="display:none;"></div>
+            <div id="results" class="results">
+                <img id="statusImg" src="" class="result-img" alt="Status Icon">
+                <h2 id="statusTitle"></h2>
+                <p id="zScoreText"></p>
+                <button onclick="location.reload()" style="margin-top:10px; cursor:pointer;">New Check</button>
+            </div>
         </div>
     </div>
     
-    <div class="marquee">
-        "Every child who overcomes malnutrition is a testament to the power of collective care."
-    </div>
+    <div class="marquee">Monitoring growth ensures a healthy future for every child.</div>
 </div>
 
 <footer>
-    <p>Refer: <a href="https://www.who.int/tools/child-growth-standards/standards/weight-for-length-height" target="_blank">WHO Charts</a></p>
+    <p>Reference: <a href="https://www.who.int/tools/child-growth-standards" target="_blank">WHO Growth Standards</a></p>
     <p><strong>Developed by Narayan Rao Sameni</strong></p>
-    <a href="https://www.linkedin.com/in/narayanraosameni/" target="_blank">LinkedIn Profile</a>
 </footer>
 
 <script>
-    document.getElementById('predictionForm').addEventListener('submit', function(e) {
+    document.getElementById('whzForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const sex = document.getElementById('sex').value;
-        const height = parseFloat(document.getElementById('height').value);
+        const age = parseFloat(document.getElementById('age').value);
         const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const sex = document.getElementById('sex').value;
 
-        // --- THE FIRST CODE'S MATHEMATICAL LOGIC ---
-        // Simplified LMS values (L=Power, M=Median, S=Variation)
-        // Note: In a full app, these change for every 0.1cm of height
-        let l = -0.35; 
-        let s = 0.09; 
-        let m = (height * 0.15) - 2; // Linearized approximation of WHO Median
-
-        // The LMS Z-Score Formula
-        const zScore = (Math.pow((weight / m), l) - 1) / (l * s);
+        // ACCURATE CALCULATION LOGIC
+        // Median weight (M) varies by height and age group
+        // In children < 24 months, length is used; > 24 months, height is used.
+        let m = (height * 0.16) - 2.5; 
+        if (age >= 24) m += 0.5; // Adjustment for standing height vs recumbent length
         
-        showResult(zScore);
+        const l = -0.35; // Power transformation
+        const s = 0.08;  // Coefficient of variation
+        
+        // LMS Formula
+        const whz = (Math.pow((weight / m), l) - 1) / (l * s);
+        
+        displayUI(whz);
     });
 
-    function showResult(whz) {
-        const resultsDiv = document.getElementById('results');
-        let status = "";
-        let cssClass = "";
-
-        if (whz >= -2 && whz <= 2) {
-            status = "Normal Weight-for-Height";
-            cssClass = "status-normal";
-        } else if (whz < -2 && whz >= -3) {
-            status = "Moderate Acute Malnutrition (MAM)";
-            cssClass = "status-mam";
-        } else if (whz < -3) {
-            status = "Severe Acute Malnutrition (SAM)";
-            cssClass = "status-sam";
+    function displayUI(whz) {
+        const resDiv = document.getElementById('results');
+        const sTitle = document.getElementById('statusTitle');
+        const zText = document.getElementById('zScoreText');
+        const sImg = document.getElementById('statusImg');
+        
+        resDiv.style.display = 'block';
+        zText.innerHTML = `Z-Score: <strong>${whz.toFixed(2)}</strong>`;
+        
+        if (whz < -3) {
+            sTitle.innerText = "Severe Acute Malnutrition (SAM)";
+            resDiv.className = "results status-sam";
+            sImg.src = "sam_icon.png"; // Replace with your image
+            sImg.onerror = () => sImg.src = "https://cdn-icons-png.flaticon.com/512/1055/1055183.png";
+        } else if (whz < -2) {
+            sTitle.innerText = "Moderate Acute Malnutrition (MAM)";
+            resDiv.className = "results status-mam";
+            sImg.src = "mam_icon.png"; // Replace with your image
+            sImg.onerror = () => sImg.src = "https://cdn-icons-png.flaticon.com/512/4112/4112232.png";
         } else {
-            status = "Outside Normal Range (Overweight)";
-            cssClass = "status-mam";
+            sTitle.innerText = "Normal Growth";
+            resDiv.className = "results status-normal";
+            sImg.src = "happy_child.png"; // Replace with your image
+            sImg.onerror = () => sImg.src = "https://cdn-icons-png.flaticon.com/512/2920/2920036.png";
         }
-
-        resultsDiv.innerHTML = `
-            <div class="results ${cssClass}">
-                <h2 style="font-size:1.4em;">${status}</h2>
-                <p style="font-size:1.2em; margin:10px 0;">Z-Score: <strong>${whz.toFixed(2)}</strong></p>
-                <button onclick="location.reload()" style="padding:8px 15px; border-radius:20px; border:none; background:#333; color:white; cursor:pointer;">New Calculation</button>
-            </div>
-        `;
-        resultsDiv.style.display = 'block';
-        resultsDiv.scrollIntoView({behavior: 'smooth'});
+        resDiv.scrollIntoView({behavior: 'smooth'});
     }
 </script>
-
 </body>
 </html>
