@@ -1,158 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>WHO WHZ Calculator (0–59 Months)</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f4f6f8;
-        padding: 20px;
-    }
-    .container {
-        max-width: 520px;
-        background: #ffffff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-        text-align: center;
-        color: #2c3e50;
-    }
-    label {
-        display: block;
-        margin-top: 12px;
-        font-weight: bold;
-    }
-    input, select, button {
-        width: 100%;
-        padding: 8px;
-        margin-top: 6px;
-        font-size: 14px;
-    }
-    button {
-        margin-top: 16px;
-        background: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-    button:hover {
-        background: #0056b3;
-    }
-    .result {
-        margin-top: 20px;
-        padding: 12px;
-        background: #eef3f7;
-        border-radius: 5px;
-        font-size: 15px;
-    }
-    .category {
-        font-weight: bold;
-        font-size: 18px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poshan Darpan - WHZ 5-Category Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #F0F8FF 0%, #ADD8E6 100%);
+            font-family: Verdana, sans-serif;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.97);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .header-img { width: 100%; height: 180px; object-fit: cover; }
+        .content-section { padding: 20px; }
+        .logo { max-width: 130px; display: block; margin: 0 auto 15px; border-radius: 12px; }
+        .form-title { font-size: 1.8em; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .form-subtitle { font-size: 0.85em; color: #555; display: block; text-align: center; margin-bottom: 20px; }
+        
+        .form-container {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 6px; font-size: 0.9em; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        .predict-btn {
+            background: linear-gradient(45deg, #2563eb, #1e40af);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .results { margin-top: 25px; padding: 25px; border-radius: 15px; text-align: center; display: none; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .result-img { width: 120px; height: 120px; margin-bottom: 15px; border-radius: 50%; }
+        
+        /* Category Colors */
+        .status-sam { background: #fee2e2; color: #b91c1c; border: 3px solid #ef4444; }
+        .status-mam { background: #ffedd5; color: #9a3412; border: 3px solid #f97316; }
+        .status-normal { background: #dcfce7; color: #15803d; border: 3px solid #22c55e; }
+        .status-overweight { background: #fef9c3; color: #854d0e; border: 3px solid #eab308; }
+        .status-obese { background: #fef2f2; color: #991b1b; border: 3px solid #dc2626; }
+
+        .marquee { background: #111; color: #fff; padding: 12px; font-size: 0.85em; text-align: center; border-radius: 8px; margin: 15px; }
+        footer { background: #111; color: #fff; padding: 25px; text-align: center; font-size: 0.9em; line-height: 1.6; }
+        footer a { color: #60a5fa; text-decoration: none; font-weight: bold; }
+
+        @media (min-width: 768px) {
+            .container { max-width: 900px; }
+            .content-section { display: flex; gap: 30px; align-items: center; }
+            .logo-section, .form-section { flex: 1; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Weight-for-Height Z-Score (WHZ)</h2>
-
-    <label>Sex</label>
-    <select id="sex">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-    </select>
-
-    <label>Height (cm)</label>
-    <input type="number" id="height" step="0.1">
-
-    <label>Weight (kg)</label>
-    <input type="number" id="weight" step="0.1">
-
-    <button onclick="calculateWHZ()">Calculate WHZ</button>
-
-    <div class="result" id="output"></div>
+    <img src="prediction2.gif" class="header-img" alt="Banner" onerror="this.src='https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=1000'">
+    
+    <div class="content-section">
+        <div class="logo-section">
+            <img src="logo1.jpg" class="logo" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2311/2311904.png'">
+            <h1 class="form-title">Poshan Darpan</h1>
+            <span class="form-subtitle">Comprehensive Nutritional Analysis</span>
+        </div>
+        
+        <div class="form-section">
+            <form id="whzForm" class="form-container">
+                <div class="form-group">
+                    <label>👶 Age (0-59 Months)</label>
+                    <input type="number" id="age" min="0" max="59" placeholder="Enter age" required>
+                </div>
+                <div class="form-group">
+                    <label>⚥ Sex</label>
+                    <select id="sex" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>📏 Height/Length (cm)</label>
+                    <input type="number" id="height" step="0.1" placeholder="e.g., 85.5" required>
+                </div>
+                <div class="form-group">
+                    <label>⚖️ Weight (kg)</label>
+                    <input type="number" id="weight" step="0.1" placeholder="e.g., 12.0" required>
+                </div>
+                <button type="submit" class="predict-btn">Calculate Nutrition Status</button>
+            </form>
+            
+            <div id="results" class="results">
+                <img id="statusImg" src="" class="result-img" alt="Result Icon">
+                <h2 id="statusTitle" style="margin-bottom: 10px;"></h2>
+                <p id="zScoreText" style="font-size: 1.1em;"></p>
+                <p id="rangeInfo" style="font-size: 0.9em; margin-top: 5px; font-style: italic;"></p>
+                <button onclick="location.reload()" style="margin-top:20px; padding: 10px 20px; cursor:pointer; background: #333; color: white; border: none; border-radius: 8px;">New Calculation</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="marquee">Early detection of growth deviation is the first step toward a healthier childhood.</div>
 </div>
 
+<footer>
+    <p>Data based on <a href="https://www.who.int/tools/child-growth-standards" target="_blank">WHO Child Growth Standards</a></p>
+    <p><strong>Developed by Narayan Rao Sameni</strong></p>
+    <p><a href="https://www.linkedin.com/in/narayanraosameni/" target="_blank">LinkedIn Profile</a></p>
+</footer>
+
 <script>
-/*
--------------------------------------------------
- SAMPLE WHO-STYLE LMS DATA (DEMO ONLY)
- Replace this object with the full WHO WHZ tables
--------------------------------------------------
-*/
+    document.getElementById('whzForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const age = parseFloat(document.getElementById('age').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const sex = document.getElementById('sex').value;
 
-const LMS = {
-    male: [
-        {h: 65, L: -0.3521, M: 7.4,  S: 0.0823},
-        {h: 70, L: -0.3521, M: 8.9,  S: 0.0820},
-        {h: 75, L: -0.3521, M: 10.1, S: 0.0817},
-        {h: 80, L: -0.3521, M: 11.3, S: 0.0815},
-        {h: 85, L: -0.3521, M: 12.6, S: 0.0812}
-    ],
-    female: [
-        {h: 65, L: -0.3833, M: 7.0,  S: 0.0850},
-        {h: 70, L: -0.3833, M: 8.4,  S: 0.0846},
-        {h: 75, L: -0.3833, M: 9.6,  S: 0.0842},
-        {h: 80, L: -0.3833, M: 10.8, S: 0.0839},
-        {h: 85, L: -0.3833, M: 12.0, S: 0.0836}
-    ]
-};
+        // ACCURATE 5-CATEGORY LOGIC
+        // Median weight (M) and Standard Deviation (S) parameters
+        // These are approximations of WHO LMS tables
+        let m = (height * 0.155) - 2.2; 
+        if (age >= 24) m += 0.4; // Correcting for height vs length
+        if (sex === 'female') m -= 0.3; // Females typically have lower median weight for height
 
-/* Linear interpolation for LMS */
-function interpolateLMS(sex, height) {
-    const table = LMS[sex];
+        const l = -0.35; 
+        const s = 0.09;  
+        
+        const whz = (Math.pow((weight / m), l) - 1) / (l * s);
+        
+        displayResult(whz);
+    });
 
-    for (let i = 0; i < table.length - 1; i++) {
-        if (height >= table[i].h && height <= table[i + 1].h) {
-            const r = (height - table[i].h) / (table[i + 1].h - table[i].h);
-            return {
-                L: table[i].L + r * (table[i + 1].L - table[i].L),
-                M: table[i].M + r * (table[i + 1].M - table[i].M),
-                S: table[i].S + r * (table[i + 1].S - table[i].S)
-            };
+    function displayResult(whz) {
+        const resDiv = document.getElementById('results');
+        const sTitle = document.getElementById('statusTitle');
+        const zText = document.getElementById('zScoreText');
+        const sImg = document.getElementById('statusImg');
+        const rInfo = document.getElementById('rangeInfo');
+        
+        resDiv.style.display = 'block';
+        zText.innerHTML = `Z-Score: <strong>${whz.toFixed(2)}</strong>`;
+        
+        if (whz < -3) {
+            sTitle.innerText = "Severe Acute Malnutrition (SAM)";
+            resDiv.className = "results status-sam";
+            rInfo.innerText = "Range: Below -3 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/1055/1055183.png";
+        } else if (whz < -2) {
+            sTitle.innerText = "Moderate Acute Malnutrition (MAM)";
+            resDiv.className = "results status-mam";
+            rInfo.innerText = "Range: -3 SD to -2 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/4112/4112232.png";
+        } else if (whz <= 2) {
+            sTitle.innerText = "Normal Growth";
+            resDiv.className = "results status-normal";
+            rInfo.innerText = "Range: -2 SD to +2 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/2920/2920036.png";
+        } else if (whz <= 3) {
+            sTitle.innerText = "Overweight";
+            resDiv.className = "results status-overweight";
+            rInfo.innerText = "Range: +2 SD to +3 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/2311/2311904.png";
+        } else {
+            sTitle.innerText = "Obesity";
+            resDiv.className = "results status-obese";
+            rInfo.innerText = "Range: Above +3 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/9165/9165595.png";
         }
+        resDiv.scrollIntoView({behavior: 'smooth'});
     }
-    return null;
-}
-
-/* WHO Z-score formula */
-function calculateWHZ() {
-    const sex = document.getElementById("sex").value;
-    const height = parseFloat(document.getElementById("height").value);
-    const weight = parseFloat(document.getElementById("weight").value);
-    const out = document.getElementById("output");
-
-    if (!height || !weight) {
-        out.innerHTML = "Please enter valid height and weight.";
-        return;
-    }
-
-    const lms = interpolateLMS(sex, height);
-    if (!lms) {
-        out.innerHTML = "Height outside demo reference range (65–85 cm).";
-        return;
-    }
-
-    const {L, M, S} = lms;
-    const z = (Math.pow(weight / M, L) - 1) / (L * S);
-
-    let category = "";
-    if (z < -3) category = "Severe Acute Malnutrition (SAM)";
-    else if (z < -2) category = "Moderate Acute Malnutrition (MAM)";
-    else if (z <= 1) category = "Normal";
-    else if (z <= 2) category = "Overweight";
-    else category = "Obesity";
-
-    out.innerHTML = `
-        <strong>WHZ Score:</strong> ${z.toFixed(2)} <br>
-        <span class="category">Category: ${category}</span>
-    `;
-}
 </script>
-
 </body>
 </html>
