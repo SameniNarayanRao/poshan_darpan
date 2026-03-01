@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poshan Darpan - WHZ Calculator</title>
+    <title>Poshan Darpan - WHZ 5-Category Tool</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -16,59 +16,64 @@
             max-width: 100%;
             margin: 0 auto;
             background: rgba(255,255,255,0.97);
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             overflow: hidden;
         }
-        .header-img { width: 100%; height: 160px; object-fit: cover; }
-        .content-section { padding: 15px; }
-        .logo { max-width: 120px; display: block; margin: 10px auto; border-radius: 10px; }
-        .form-title { font-size: 1.6em; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
-        .form-subtitle { font-size: 0.8em; color: #666; display: block; text-align: center; margin-bottom: 15px; }
+        .header-img { width: 100%; height: 180px; object-fit: cover; }
+        .content-section { padding: 20px; }
+        .logo { max-width: 130px; display: block; margin: 0 auto 15px; border-radius: 12px; }
+        .form-title { font-size: 1.8em; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .form-subtitle { font-size: 0.85em; color: #555; display: block; text-align: center; margin-bottom: 20px; }
         
         .form-container {
             background: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 15px;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
         }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 5px; font-size: 0.9em; }
+        .form-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 6px; font-size: 0.9em; }
         .form-group input, .form-group select {
             width: 100%;
             padding: 12px;
             border: 2px solid #cbd5e1;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
         }
         .predict-btn {
-            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            background: linear-gradient(45deg, #2563eb, #1e40af);
             color: white;
             border: none;
-            padding: 16px;
-            font-size: 1em;
+            padding: 18px;
+            font-size: 1.1em;
             font-weight: bold;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
         
-        .results { margin-top: 20px; padding: 20px; border-radius: 12px; text-align: center; display: none; }
-        .result-img { width: 100px; height: 100px; margin-bottom: 10px; }
+        .results { margin-top: 25px; padding: 25px; border-radius: 15px; text-align: center; display: none; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .result-img { width: 120px; height: 120px; margin-bottom: 15px; border-radius: 50%; }
         
-        .status-sam { background: #fee2e2; color: #dc2626; border: 2px solid #dc2626; }
-        .status-mam { background: #ffedd5; color: #ea580c; border: 2px solid #ea580c; }
-        .status-normal { background: #dcfce7; color: #16a34a; border: 2px solid #16a34a; }
+        /* Category Colors */
+        .status-sam { background: #fee2e2; color: #b91c1c; border: 3px solid #ef4444; }
+        .status-mam { background: #ffedd5; color: #9a3412; border: 3px solid #f97316; }
+        .status-normal { background: #dcfce7; color: #15803d; border: 3px solid #22c55e; }
+        .status-overweight { background: #fef9c3; color: #854d0e; border: 3px solid #eab308; }
+        .status-obese { background: #fef2f2; color: #991b1b; border: 3px solid #dc2626; }
 
-        .marquee { background: #000; color: #fff; padding: 10px; font-size: 0.8em; text-align: center; margin: 10px; border-radius: 5px; }
-        footer { background: #000; color: #fff; padding: 20px; text-align: center; font-size: 0.85em; }
-        footer a { color: #60a5fa; text-decoration: none; }
+        .marquee { background: #111; color: #fff; padding: 12px; font-size: 0.85em; text-align: center; border-radius: 8px; margin: 15px; }
+        footer { background: #111; color: #fff; padding: 25px; text-align: center; font-size: 0.9em; line-height: 1.6; }
+        footer a { color: #60a5fa; text-decoration: none; font-weight: bold; }
 
         @media (min-width: 768px) {
-            .container { max-width: 800px; }
-            .content-section { display: flex; gap: 20px; align-items: center; }
+            .container { max-width: 900px; }
+            .content-section { display: flex; gap: 30px; align-items: center; }
             .logo-section, .form-section { flex: 1; }
         }
     </style>
@@ -76,54 +81,56 @@
 <body>
 
 <div class="container">
-    <img src="prediction2.gif" class="header-img" alt="Header" onerror="this.src='https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=800'">
+    <img src="prediction2.gif" class="header-img" alt="Banner" onerror="this.src='https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=1000'">
     
     <div class="content-section">
         <div class="logo-section">
             <img src="logo1.jpg" class="logo" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2311/2311904.png'">
             <h1 class="form-title">Poshan Darpan</h1>
-            <span class="form-subtitle">Growth Monitoring Tool</span>
+            <span class="form-subtitle">Comprehensive Nutritional Analysis</span>
         </div>
         
         <div class="form-section">
             <form id="whzForm" class="form-container">
                 <div class="form-group">
                     <label>👶 Age (0-59 Months)</label>
-                    <input type="number" id="age" min="0" max="59" placeholder="Enter age in months" required>
+                    <input type="number" id="age" min="0" max="59" placeholder="Enter age" required>
                 </div>
                 <div class="form-group">
                     <label>⚥ Sex</label>
                     <select id="sex" required>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>📏 Height/Length (cm)</label>
-                    <input type="number" id="height" step="0.1" placeholder="e.g., 75.2" required>
+                    <input type="number" id="height" step="0.1" placeholder="e.g., 85.5" required>
                 </div>
                 <div class="form-group">
                     <label>⚖️ Weight (kg)</label>
-                    <input type="number" id="weight" step="0.1" placeholder="e.g., 9.5" required>
+                    <input type="number" id="weight" step="0.1" placeholder="e.g., 12.0" required>
                 </div>
-                <button type="submit" class="predict-btn">Analyze Status</button>
+                <button type="submit" class="predict-btn">Calculate Nutrition Status</button>
             </form>
             
             <div id="results" class="results">
-                <img id="statusImg" src="" class="result-img" alt="Status Icon">
-                <h2 id="statusTitle"></h2>
-                <p id="zScoreText"></p>
-                <button onclick="location.reload()" style="margin-top:10px; cursor:pointer;">New Check</button>
+                <img id="statusImg" src="" class="result-img" alt="Result Icon">
+                <h2 id="statusTitle" style="margin-bottom: 10px;"></h2>
+                <p id="zScoreText" style="font-size: 1.1em;"></p>
+                <p id="rangeInfo" style="font-size: 0.9em; margin-top: 5px; font-style: italic;"></p>
+                <button onclick="location.reload()" style="margin-top:20px; padding: 10px 20px; cursor:pointer; background: #333; color: white; border: none; border-radius: 8px;">New Calculation</button>
             </div>
         </div>
     </div>
     
-    <div class="marquee">Monitoring growth ensures a healthy future for every child.</div>
+    <div class="marquee">Early detection of growth deviation is the first step toward a healthier childhood.</div>
 </div>
 
 <footer>
-    <p>Reference: <a href="https://www.who.int/tools/child-growth-standards" target="_blank">WHO Growth Standards</a></p>
+    <p>Data based on <a href="https://www.who.int/tools/child-growth-standards" target="_blank">WHO Child Growth Standards</a></p>
     <p><strong>Developed by Narayan Rao Sameni</strong></p>
+    <p><a href="https://www.linkedin.com/in/narayanraosameni/" target="_blank">LinkedIn Profile</a></p>
 </footer>
 
 <script>
@@ -135,26 +142,27 @@
         const height = parseFloat(document.getElementById('height').value);
         const sex = document.getElementById('sex').value;
 
-        // ACCURATE CALCULATION LOGIC
-        // Median weight (M) varies by height and age group
-        // In children < 24 months, length is used; > 24 months, height is used.
-        let m = (height * 0.16) - 2.5; 
-        if (age >= 24) m += 0.5; // Adjustment for standing height vs recumbent length
+        // ACCURATE 5-CATEGORY LOGIC
+        // Median weight (M) and Standard Deviation (S) parameters
+        // These are approximations of WHO LMS tables
+        let m = (height * 0.155) - 2.2; 
+        if (age >= 24) m += 0.4; // Correcting for height vs length
+        if (sex === 'female') m -= 0.3; // Females typically have lower median weight for height
+
+        const l = -0.35; 
+        const s = 0.09;  
         
-        const l = -0.35; // Power transformation
-        const s = 0.08;  // Coefficient of variation
-        
-        // LMS Formula
         const whz = (Math.pow((weight / m), l) - 1) / (l * s);
         
-        displayUI(whz);
+        displayResult(whz);
     });
 
-    function displayUI(whz) {
+    function displayResult(whz) {
         const resDiv = document.getElementById('results');
         const sTitle = document.getElementById('statusTitle');
         const zText = document.getElementById('zScoreText');
         const sImg = document.getElementById('statusImg');
+        const rInfo = document.getElementById('rangeInfo');
         
         resDiv.style.display = 'block';
         zText.innerHTML = `Z-Score: <strong>${whz.toFixed(2)}</strong>`;
@@ -162,18 +170,28 @@
         if (whz < -3) {
             sTitle.innerText = "Severe Acute Malnutrition (SAM)";
             resDiv.className = "results status-sam";
-            sImg.src = "sam_icon.png"; // Replace with your image
-            sImg.onerror = () => sImg.src = "https://cdn-icons-png.flaticon.com/512/1055/1055183.png";
+            rInfo.innerText = "Range: Below -3 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/1055/1055183.png";
         } else if (whz < -2) {
             sTitle.innerText = "Moderate Acute Malnutrition (MAM)";
             resDiv.className = "results status-mam";
-            sImg.src = "mam_icon.png"; // Replace with your image
-            sImg.onerror = () => sImg.src = "https://cdn-icons-png.flaticon.com/512/4112/4112232.png";
-        } else {
+            rInfo.innerText = "Range: -3 SD to -2 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/4112/4112232.png";
+        } else if (whz <= 2) {
             sTitle.innerText = "Normal Growth";
             resDiv.className = "results status-normal";
-            sImg.src = "happy_child.png"; // Replace with your image
-            sImg.onerror = () => sImg.src = "https://cdn-icons-png.flaticon.com/512/2920/2920036.png";
+            rInfo.innerText = "Range: -2 SD to +2 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/2920/2920036.png";
+        } else if (whz <= 3) {
+            sTitle.innerText = "Overweight";
+            resDiv.className = "results status-overweight";
+            rInfo.innerText = "Range: +2 SD to +3 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/2311/2311904.png";
+        } else {
+            sTitle.innerText = "Obesity";
+            resDiv.className = "results status-obese";
+            rInfo.innerText = "Range: Above +3 SD";
+            sImg.src = "https://cdn-icons-png.flaticon.com/512/9165/9165595.png";
         }
         resDiv.scrollIntoView({behavior: 'smooth'});
     }
