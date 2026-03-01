@@ -13,7 +13,6 @@
             line-height: 1.4;
             min-height: 100vh;
         }
-        
         .container {
             max-width: 100%;
             margin: 0 auto;
@@ -22,50 +21,28 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        
         .header-img { 
             width: 100%; 
             height: 150px;
             object-fit: cover; 
             background-color: #3b82f6;
         }
-        
-        .content-section {
-            padding: 15px;
-        }
-        
+        .content-section { padding: 15px; }
         .logo { 
             max-width: 100%; 
-            max-height: 120px;
+            max-height: 150px;
             width: auto; 
             display: block; 
             margin: 10px auto; 
-            border-radius: 50%;
         }
-        
         .form-title { 
             font-size: 1.6em;
             color: #1e3a8a; 
             text-align: center;
             margin-bottom: 5px;
-            line-height: 1.2;
         }
-        
-        .form-subtitle {
-            font-size: 0.75em;
-            color: #666;
-            text-align: center;
-            display: block;
-        }
-        
-        .form-note {
-            font-size: 0.9em;
-            color: #374151;
-            text-align: center;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-        
+        .form-subtitle { font-size: 0.75em; color: #666; display: block; text-align: center;}
+        .form-note { font-size: 0.9em; color: #374151; text-align: center; margin-bottom: 20px; font-style: italic; }
         .form-container {
             background: linear-gradient(145deg, #ffffff, #f8fafc);
             padding: 20px;
@@ -73,34 +50,15 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             margin-bottom: 15px;
         }
-        
-        .form-group {
-            margin-bottom: 18px;
-        }
-        
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            color: #1e40af;
-            margin-bottom: 5px;
-            font-size: 0.95em;
-        }
-        
-        .form-group input {
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 5px; }
+        .form-group input, .form-group select {
             width: 100%;
             padding: 14px 12px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 16px;
-            transition: all 0.3s ease;
         }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
-        }
-        
         .predict-btn {
             background: linear-gradient(45deg, #3b82f6, #1d4ed8);
             color: white;
@@ -112,167 +70,123 @@
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            margin-top: 5px;
         }
-        
-        .predict-btn:active { transform: scale(0.98); }
-        
-        .results {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            animation: slideIn 0.4s ease;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .marquee {
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 12px;
-            font-size: 0.85em;
-            text-align: center;
-            margin: 15px 10px;
-            border-radius: 8px;
-            line-height: 1.4;
-        }
-        
-        footer {
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 20px 15px;
-            text-align: center;
-            font-size: 0.9em;
-        }
-        
-        footer a { color: #60a5fa; text-decoration: none; margin: 0 5px; }
-        
+        .results { margin-top: 20px; padding: 20px; border-radius: 12px; text-align: center; }
         .status-sam { color: #dc2626; background: rgba(220,38,38,0.12); border-left: 5px solid #dc2626; }
-        .status-mam, .status-overweight { color: #ea580c; background: rgba(234,88,12,0.12); border-left: 5px solid #ea580c; }
+        .status-mam { color: #ea580c; background: rgba(234,88,12,0.12); border-left: 5px solid #ea580c; }
         .status-normal { color: #16a34a; background: rgba(22,163,74,0.12); border-left: 5px solid #16a34a; }
-        .status-obesity { color: #b91c1c; background: rgba(185,28,28,0.12); border-left: 5px solid #b91c1c; }
-        
+        .marquee { background: rgba(0,0,0,0.9); color: white; padding: 12px; font-size: 0.85em; text-align: center; border-radius: 8px; margin: 10px; }
+        footer { background: rgba(0,0,0,0.9); color: white; padding: 20px; text-align: center; font-size: 0.9em; }
+        footer a { color: #60a5fa; text-decoration: none; }
+
         @media (min-width: 768px) {
-            body { padding: 20px; }
             .container { max-width: 850px; }
-            .header-img { height: 180px; }
             .content-section { display: flex; gap: 20px; align-items: center; }
-            .logo-section, .form-section { flex: 1; padding: 20px; }
-            .form-title { font-size: 1.8em; }
+            .logo-section, .form-section { flex: 1; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=1000" class="header-img" alt="Growth Header">
-        
-        <div class="content-section">
-            <div class="logo-section">
-                <img src="https://images.unsplash.com/photo-1530652101053-8c0db4fbb5de?auto=format&fit=crop&q=80&w=400" class="logo" alt="Poshan Logo">
-            </div>
-            
-            <div class="form-section">
-                <h1 class="form-title"> Poshan Darpan <br>
-                    <span class="form-subtitle">(Child Growth Monitoring Tool)</span>
-                </h1>
-                <p class="form-note">(Children 0-59 Months Age)</p>
-                
-                <form id="predictionForm" class="form-container">
-                    <div class="form-group">
-                        <label>👶 Age of Child (months)</label>
-                        <input type="number" id="age" step="0.1" min="0" placeholder="e.g., 12.5" required>
-                    </div>
-                    <div class="form-group">
-                        <label>⚥ Sex (1=Male, 2=Female)</label>
-                        <input type="number" id="sex" min="1" max="2" placeholder="1 or 2" required>
-                    </div>
-                    <div class="form-group">
-                        <label>📏 Height (cm)</label>
-                        <input type="number" id="height" step="0.1" placeholder="e.g., 85.5" required>
-                    </div>
-                    <div class="form-group">
-                        <label>⚖️ Weight (kg)</label>
-                        <input type="number" id="weight" step="0.1" placeholder="e.g., 12.3" required>
-                    </div>
-                    <button type="submit" class="predict-btn">🔍 Predict Nutrition Status</button>
-                </form>
-                
-                <div id="results" style="display:none;"></div>
-            </div>
+<div class="container">
+    <img src="prediction2.gif" class="header-img" alt="Header Banner" onerror="this.src='https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=1000'">
+    
+    <div class="content-section">
+        <div class="logo-section">
+            <img src="logo1.jpg" class="logo" alt="Logo" onerror="this.style.display='none'">
         </div>
         
-        <div class="marquee">
-            "Every child who overcomes malnutrition is a testament to the power of collective care, reminding us that with the right nutrition and community support, we can unlock a lifetime of potential, health, and bright possibilities."
+        <div class="form-section">
+            <h1 class="form-title"> Poshan Darpan <br>
+                <span class="form-subtitle">(Child Growth Monitoring Tool)</span>
+            </h1>
+            <p class="form-note">(Children 0-59 Months Age)</p>
+            
+            <form id="predictionForm" class="form-container">
+                <div class="form-group">
+                    <label>👶 Sex</label>
+                    <select id="sex" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>📏 Height (cm)</label>
+                    <input type="number" id="height" step="0.1" placeholder="e.g., 65.0" required>
+                </div>
+                <div class="form-group">
+                    <label>⚖️ Weight (kg)</label>
+                    <input type="number" id="weight" step="0.1" placeholder="e.g., 7.5" required>
+                </div>
+                <button type="submit" class="predict-btn">🔍 Calculate WHZ Score</button>
+            </form>
+            
+            <div id="results" style="display:none;"></div>
         </div>
     </div>
+    
+    <div class="marquee">
+        "Every child who overcomes malnutrition is a testament to the power of collective care."
+    </div>
+</div>
 
-    <footer>
-        <p>Refer: 
-            <a href="https://www.who.int/tools/child-growth-standards/standards/weight-for-length-height" target="_blank">WHO Charts</a> | 
-            <a href="https://www.fantaproject.org/sites/default/files/download/Calculate-WHZ-2.6-NACS-Users-Guide-Apr2016.pdf" target="_blank">WHZ Manual</a>
-        </p>
-        <p style="margin-top:10px;"><strong>Developed by Narayan Rao Sameni</strong></p> 
-        <a href="https://www.linkedin.com/in/narayanraosameni/" target="_blank">LinkedIn Profile</a>
-    </footer>
+<footer>
+    <p>Refer: <a href="https://www.who.int/tools/child-growth-standards/standards/weight-for-length-height" target="_blank">WHO Charts</a></p>
+    <p><strong>Developed by Narayan Rao Sameni</strong></p>
+    <a href="https://www.linkedin.com/in/narayanraosameni/" target="_blank">LinkedIn Profile</a>
+</footer>
 
-    <script>
-        document.getElementById('predictionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const height = parseFloat(document.getElementById('height').value) || 0;
-            const weight = parseFloat(document.getElementById('weight').value) || 0;
-            
-            if (!height || !weight) {
-                alert('Please enter Height and Weight');
-                return;
-            }
-            
-            const medianWeight = getMedianWeightForHeight(height);
-            const whz = (weight - medianWeight) / 1.2; // 1.2 is a simplified SD
-            const status = getNutritionStatus(whz);
-            showResult(status, whz);
-        });
+<script>
+    document.getElementById('predictionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const sex = document.getElementById('sex').value;
+        const height = parseFloat(document.getElementById('height').value);
+        const weight = parseFloat(document.getElementById('weight').value);
 
-        function getMedianWeightForHeight(h) {
-            if (h < 50) return 2.5;
-            if (h < 60) return 3.8;
-            if (h < 70) return 5.5;
-            if (h < 80) return 7.5;
-            if (h < 90) return 9.8;
-            if (h < 100) return 12.5;
-            return 15.0;
+        // --- THE FIRST CODE'S MATHEMATICAL LOGIC ---
+        // Simplified LMS values (L=Power, M=Median, S=Variation)
+        // Note: In a full app, these change for every 0.1cm of height
+        let l = -0.35; 
+        let s = 0.09; 
+        let m = (height * 0.15) - 2; // Linearized approximation of WHO Median
+
+        // The LMS Z-Score Formula
+        const zScore = (Math.pow((weight / m), l) - 1) / (l * s);
+        
+        showResult(zScore);
+    });
+
+    function showResult(whz) {
+        const resultsDiv = document.getElementById('results');
+        let status = "";
+        let cssClass = "";
+
+        if (whz >= -2 && whz <= 2) {
+            status = "Normal Weight-for-Height";
+            cssClass = "status-normal";
+        } else if (whz < -2 && whz >= -3) {
+            status = "Moderate Acute Malnutrition (MAM)";
+            cssClass = "status-mam";
+        } else if (whz < -3) {
+            status = "Severe Acute Malnutrition (SAM)";
+            cssClass = "status-sam";
+        } else {
+            status = "Outside Normal Range (Overweight)";
+            cssClass = "status-mam";
         }
 
-        function getNutritionStatus(whz) {
-            if (whz < -3) return {code: 1, name: 'Severe Acute Malnutrition (SAM)', range: '< -3'};
-            if (whz >= -3 && whz < -2) return {code: 2, name: 'Moderate Acute Malnutrition (MAM)', range: '≥ -3 to < -2'};
-            if (whz >= -2 && whz <= 2) return {code: 3, name: 'Normal', range: '≥ -2 to ≤ +2'};
-            if (whz > 2 && whz <= 3) return {code: 4, name: 'Overweight', range: '> +2 to ≤ +3'};
-            return {code: 5, name: 'Obesity', range: '> +3'};
-        }
+        resultsDiv.innerHTML = `
+            <div class="results ${cssClass}">
+                <h2 style="font-size:1.4em;">${status}</h2>
+                <p style="font-size:1.2em; margin:10px 0;">Z-Score: <strong>${whz.toFixed(2)}</strong></p>
+                <button onclick="location.reload()" style="padding:8px 15px; border-radius:20px; border:none; background:#333; color:white; cursor:pointer;">New Calculation</button>
+            </div>
+        `;
+        resultsDiv.style.display = 'block';
+        resultsDiv.scrollIntoView({behavior: 'smooth'});
+    }
+</script>
 
-        function showResult(status, whz) {
-            const resultsDiv = document.getElementById('results');
-            const colors = {1: 'status-sam', 2: 'status-mam', 3: 'status-normal', 4: 'status-overweight', 5: 'status-obesity'};
-            const icon = status.code <= 3 ? "✅" : "⚠️";
-            
-            resultsDiv.innerHTML = `
-                <div class="results ${colors[status.code]}">
-                    <h2 style="font-size:1.4em; margin-bottom:8px;">${icon} ${status.name}</h2>
-                    <p style="font-size:1.1em; margin-bottom:15px;">Z-Score: <strong>${whz.toFixed(2)}</strong> (${status.range})</p>
-                    <button onclick="location.reload()" style="padding:10px 20px; background:#ef4444; color:white; border:none; border-radius:25px; cursor:pointer; font-weight:bold;">RESET</button>
-                </div>
-            `;
-            resultsDiv.style.display = 'block';
-            resultsDiv.scrollIntoView({behavior: 'smooth'});
-        }
-    </script>
 </body>
 </html>
