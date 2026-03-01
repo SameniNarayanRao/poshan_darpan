@@ -171,30 +171,31 @@
             sTitle.innerText = "Severe Acute Malnutrition (SAM)";
             resDiv.className = "results status-sam";
             rInfo.innerText = "Range: Below -3 SD";
-            sImg.src = "https://cdn-icons-png.flaticon.com/512/1055/1055183.png";
+            sImg.src = "unhappy.png";
         } else if (whz < -2) {
             sTitle.innerText = "Moderate Acute Malnutrition (MAM)";
             resDiv.className = "results status-mam";
             rInfo.innerText = "Range: -3 SD to -2 SD";
-            sImg.src = "https://cdn-icons-png.flaticon.com/512/4112/4112232.png";
+            sImg.src = "unhappy.png";
         } else if (whz <= 2) {
             sTitle.innerText = "Normal Growth";
             resDiv.className = "results status-normal";
             rInfo.innerText = "Range: -2 SD to +2 SD";
-            sImg.src = "https://cdn-icons-png.flaticon.com/512/2920/2920036.png";
+            sImg.src = "happy.png";
         } else if (whz <= 3) {
             sTitle.innerText = "Overweight";
             resDiv.className = "results status-overweight";
             rInfo.innerText = "Range: +2 SD to +3 SD";
-            sImg.src = "https://cdn-icons-png.flaticon.com/512/2311/2311904.png";
+            sImg.src = "unhappy.png";
         } else {
             sTitle.innerText = "Obesity";
             resDiv.className = "results status-obese";
             rInfo.innerText = "Range: Above +3 SD";
-            sImg.src = "https://cdn-icons-png.flaticon.com/512/9165/9165595.png";
+            sImg.src = "unhappy.png";
         }
         resDiv.scrollIntoView({behavior: 'smooth'});
     }
 </script>
 </body>
 </html>
+
