@@ -149,7 +149,7 @@
         if (age >= 24) m += 0.4; // Correcting for height vs length
         if (sex === 'female') m -= 0.3; // Females typically have lower median weight for height
 
-        const l = -0.35; 
+        const l = -0.30; 
         const s = 0.09;  
         
         const whz = (Math.pow((weight / m), l) - 1) / (l * s);
@@ -198,3 +198,4 @@
 </script>
 </body>
 </html>
+
