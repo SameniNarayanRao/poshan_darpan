@@ -146,7 +146,7 @@
         // Median weight (M) and Standard Deviation (S) parameters
         // These are approximations of WHO LMS tables
         let m = (height * 0.155) - 2.2; 
-        if (age >= 24) m += 0.4; // Correcting for height vs length
+        if (age >= 24) m += 0.2; // Correcting for height vs length
         if (sex === 'female') m -= 0.3; // Females typically have lower median weight for height
 
         const l = -0.35; 
@@ -198,3 +198,4 @@
 </script>
 </body>
 </html>
+
