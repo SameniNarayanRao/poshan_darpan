@@ -171,31 +171,39 @@
             sTitle.innerText = "Severe Acute Malnutrition (SAM)";
             resDiv.className = "results status-sam";
             rInfo.innerText = "Range: Below -3 SD";
-            sImg.src = "unhappy.png";
+            
         } else if (whz < -2) {
             sTitle.innerText = "Moderate Acute Malnutrition (MAM)";
             resDiv.className = "results status-mam";
             rInfo.innerText = "Range: -3 SD to -2 SD";
-            sImg.src = "unhappy.png";
+            
         } else if (whz <= 2) {
             sTitle.innerText = "Normal Growth";
             resDiv.className = "results status-normal";
             rInfo.innerText = "Range: -2 SD to +2 SD";
-            sImg.src = "happy.png";
+            
         } else if (whz <= 3) {
             sTitle.innerText = "Overweight";
             resDiv.className = "results status-overweight";
             rInfo.innerText = "Range: +2 SD to +3 SD";
-            sImg.src = "unhappy.png";
+            
         } else {
             sTitle.innerText = "Obesity";
             resDiv.className = "results status-obese";
             rInfo.innerText = "Range: Above +3 SD";
-            sImg.src = "unhappy.png";
+
+            resultsDiv.innerHTML = `
+                <div class="results ${colors[status.code]}">
+                    <h2 style="font-size:1.6em; margin-bottom:8px;">${status.name}</h2>
+                    <p style="font-size:1.1em; margin-bottom:15px;">Z-Score: <strong>${whz.toFixed(2)}</strong> ${status.range}</p>
+                    <img src="${status.code <= 3 ? 'happy.gif' : 'unhappy.gif'}" style="max-height:100px; max-width:100%;">
+                    <br><button onclick="location.reload()" style="margin-top:15px; padding:10px 20px; background:#ef4444; color:white; border:none; border-radius:8px; cursor:pointer;">New Prediction</button>
+                </div>
+
+            
         }
         resDiv.scrollIntoView({behavior: 'smooth'});
     }
 </script>
 </body>
 </html>
-
