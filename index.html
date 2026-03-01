@@ -3,194 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poshan Darpan - Precise Growth Monitor</title>
+    <title>Poshan Darpan - Precise Growth Analysis</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: linear-gradient(135deg, #F0F8FF 0%, #ADD8E6 100%);
-            font-family: Verdana, sans-serif;
-            padding: 10px;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.98);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .header-img { width: 100%; height: 160px; object-fit: cover; }
-        .content-section { padding: 20px; }
-        .logo { max-width: 120px; display: block; margin: 0 auto 10px; border-radius: 10px; }
-        .form-title { font-size: 1.8em; color: #1e3a8a; text-align: center; margin-bottom: 5px; }
-        .form-subtitle { font-size: 0.8em; color: #666; display: block; text-align: center; margin-bottom: 20px; }
+        body { background: #f0f4f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 15px; }
+        .app-card { max-width: 500px; margin: auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .header { background: #1e40af; color: white; padding: 25px; text-align: center; }
+        .form-body { padding: 25px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 16px; outline: none; }
+        input:focus { border-color: #3b82f6; }
+        .btn-check { width: 100%; background: #3b82f6; color: white; border: none; padding: 15px; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-check:hover { background: #2563eb; }
         
-        .form-container {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 15px;
-        }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: bold; color: #1e40af; margin-bottom: 5px; font-size: 0.9em; }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .predict-btn {
-            background: linear-gradient(45deg, #2563eb, #1e40af);
-            color: white;
-            border: none;
-            padding: 16px;
-            font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            width: 100%;
-            text-transform: uppercase;
-        }
+        .result-overlay { margin-top: 20px; padding: 20px; border-radius: 15px; display: none; text-align: center; }
+        .status-1 { background: #fee2e2; color: #b91c1c; border: 2px solid #ef4444; } /* SAM */
+        .status-2 { background: #ffedd5; color: #9a3412; border: 2px solid #f97316; } /* MAM */
+        .status-3 { background: #dcfce7; color: #15803d; border: 2px solid #22c55e; } /* Normal */
+        .status-4 { background: #fef9c3; color: #854d0e; border: 2px solid #eab308; } /* Overweight */
+        .status-5 { background: #fee2e2; color: #991b1b; border: 2px solid #dc2626; } /* Obesity */
         
-        .results { margin-top: 20px; padding: 25px; border-radius: 12px; text-align: center; display: none; }
-        .result-img { width: 110px; height: 110px; margin-bottom: 10px; }
-        
-        /* Status Colors based on your CSV logic */
-        .status-1 { background: #fee2e2; color: #b91c1c; border: 3px solid #dc2626; } /* SAM */
-        .status-2 { background: #ffedd5; color: #9a3412; border: 3px solid #f97316; } /* MAM */
-        .status-3 { background: #dcfce7; color: #15803d; border: 3px solid #22c55e; } /* Normal */
-        .status-4 { background: #fef9c3; color: #854d0e; border: 3px solid #eab308; } /* Overweight */
-        .status-5 { background: #fef2f2; color: #991b1b; border: 3px solid #dc2626; } /* Obesity */
-
-        .marquee { background: #000; color: #fff; padding: 10px; font-size: 0.8em; text-align: center; margin: 10px; border-radius: 5px; }
-        footer { background: #000; color: #fff; padding: 20px; text-align: center; font-size: 0.85em; }
-        footer a { color: #60a5fa; text-decoration: none; }
+        footer { text-align: center; margin-top: 20px; font-size: 12px; color: #6b7280; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <img src="prediction2.gif" class="header-img" alt="Header" onerror="this.src='https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800'">
-    
-    <div class="content-section">
-        <div class="logo-section">
-            <img src="logo1.jpg" class="logo" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2311/2311904.png'">
-            <h1 class="form-title">Poshan Darpan</h1>
-            <span class="form-subtitle">Precise Data-Referenced Analysis</span>
-        </div>
-        
-        <div class="form-section">
-            <div class="form-container">
-                <div class="form-group">
-                    <label>👶 Age (Months)</label>
-                    <input type="number" id="age" placeholder="0-59" min="0" max="59">
-                </div>
-                <div class="form-group">
-                    <label>⚥ Sex (1=Male, 2=Female)</label>
-                    <input type="number" id="sex" placeholder="1 or 2" min="1" max="2">
-                </div>
-                <div class="form-group">
-                    <label>📏 Height (cm)</label>
-                    <input type="number" id="height" step="1" placeholder="e.g., 45">
-                </div>
-                <div class="form-group">
-                    <label>⚖️ Weight (kg)</label>
-                    <input type="number" id="weight" step="0.1" placeholder="e.g., 2.5">
-                </div>
-                <button class="predict-btn" onclick="lookupStatus()">Check Status</button>
-            </div>
-            
-            <div id="results" class="results">
-                <img id="statusImg" src="" class="result-img">
-                <h2 id="statusTitle"></h2>
-                <p id="detailsText" style="margin-top:10px;"></p>
-                <button onclick="location.reload()" style="margin-top:15px; padding:8px 15px; cursor:pointer; border-radius:20px; border:none;">Reset</button>
-            </div>
-        </div>
+<div class="app-card">
+    <div class="header">
+        <h2>Poshan Darpan</h2>
+        <p>Precise Nutritional Status Lookup</p>
     </div>
     
-    <div class="marquee">Using direct reference data for 100% accuracy.</div>
+    <div class="form-body">
+        <div class="input-group">
+            <label>Age (Months)</label>
+            <input type="number" id="age" placeholder="0-59">
+        </div>
+        <div class="input-group">
+            <label>Sex (1=Male, 2=Female)</label>
+            <select id="sex">
+                <option value="1">1 (Male)</option>
+                <option value="2">2 (Female)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Height (cm)</label>
+            <input type="number" id="height" step="1" placeholder="e.g. 45">
+        </div>
+        <div class="input-group">
+            <label>Weight (kg)</label>
+            <input type="number" id="weight" step="0.1" placeholder="e.g. 2.5">
+        </div>
+        
+        <button class="btn-check" onclick="performLookup()">Check Status</button>
+        
+        <div id="resultBox" class="result-overlay">
+            <h3 id="statusLabel"></h3>
+            <p id="dataRef" style="font-size: 14px; margin-top: 5px;"></p>
+        </div>
+    </div>
 </div>
 
 <footer>
-    <p>Reference: Data.csv | Developed by Narayan Rao Sameni</p>
+    <p>Reference: Data.csv | Status Categories: 1-SAM, 2-MAM, 3-Normal, 4-Overweight, 5-Obesity</p>
 </footer>
 
 <script>
-    async function lookupStatus() {
+    async function performLookup() {
         const uAge = parseInt(document.getElementById('age').value);
         const uSex = parseInt(document.getElementById('sex').value);
         const uHeight = parseInt(document.getElementById('height').value);
-        const uWeight = parseFloat(document.getElementById('weight').value);
+        const uWeight = parseFloat(document.getElementById('weight').value).toFixed(1);
 
-        if (isNaN(uAge) || isNaN(uSex) || isNaN(uHeight) || isNaN(uWeight)) {
-            alert("Please fill all fields accurately.");
-            return;
-        }
+        const resBox = document.getElementById('resultBox');
+        const sLabel = document.getElementById('statusLabel');
+        const dRef = document.getElementById('dataRef');
 
         try {
-            // Load the CSV file
             const response = await fetch('Data.csv');
-            const data = await response.text();
-            const rows = data.split('\n').slice(1); // Skip header
+            const csvText = await response.text();
+            const lines = csvText.split('\n');
+            
+            let finalStatus = null;
 
-            let bestMatchStatus = 3; // Default to Normal
-            let found = false;
-
-            for (let row of rows) {
-                const cols = row.split(',');
+            // Iterate through data to find exact match for Age, Sex, Height, and Weight
+            for (let i = 1; i < lines.length; i++) {
+                const cols = lines[i].split(',');
                 if (cols.length < 5) continue;
 
-                const csvAge = parseInt(cols[0]);
-                const csvSex = parseInt(cols[1]);
-                const csvHeight = parseInt(cols[2]);
-                const csvWeight = parseFloat(cols[3]);
-                const csvStatus = parseInt(cols[4]);
+                // Column Index: 0=Age, 1=Sex, 2=Height, 3=Weight, 4=Status
+                const cAge = parseInt(cols[0]);
+                const cSex = parseInt(cols[1]);
+                const cHeight = parseInt(cols[2]);
+                const cWeight = parseFloat(cols[3]).toFixed(1);
+                const cStatus = parseInt(cols[4]);
 
-                // Matching logic based on your CSV structure
-                if (csvAge === uAge && csvSex === uSex && csvHeight === uHeight) {
-                    // Check if current weight matches this specific row's status
-                    if (Math.abs(csvWeight - uWeight) < 0.05) {
-                        bestMatchStatus = csvStatus;
-                        found = true;
-                        break;
-                    }
+                if (cAge === uAge && cSex === uSex && cHeight === uHeight && cWeight === uWeight) {
+                    finalStatus = cStatus;
+                    break;
                 }
             }
 
-            displayResult(bestMatchStatus, uWeight, uHeight);
-        } catch (error) {
-            alert("Error: Ensure Data.csv is in the same folder as this HTML file.");
-            console.error(error);
+            if (finalStatus !== null) {
+                const names = {
+                    1: "SAM (Severe Acute Malnutrition)",
+                    2: "MAM (Moderate Acute Malnutrition)",
+                    3: "Normal Growth",
+                    4: "Overweight",
+                    5: "Obesity"
+                };
+
+                resBox.style.display = "block";
+                resBox.className = `result-overlay status-${finalStatus}`;
+                sLabel.innerText = names[finalStatus];
+                dRef.innerText = `Matched Record: ${uAge}m, ${uSex===1?'M':'F'}, ${uHeight}cm, ${uWeight}kg`;
+            } else {
+                alert("No exact match found in Data.csv for these specific measurements.");
+            }
+
+        } catch (err) {
+            alert("Error loading Data.csv. Please ensure the file is in the same folder.");
         }
-    }
-
-    function displayResult(status, weight, height) {
-        const resDiv = document.getElementById('results');
-        const sTitle = document.getElementById('statusTitle');
-        const sImg = document.getElementById('statusImg');
-        const dText = document.getElementById('detailsText');
-        
-        const statusMap = {
-            1: { name: "Severe Acute Malnutrition (SAM)", img: "https://cdn-icons-png.flaticon.com/512/1055/1055183.png" },
-            2: { name: "Moderate Acute Malnutrition (MAM)", img: "https://cdn-icons-png.flaticon.com/512/4112/4112232.png" },
-            3: { name: "Normal Growth", img: "https://cdn-icons-png.flaticon.com/512/2920/2920036.png" },
-            4: { name: "Overweight", img: "https://cdn-icons-png.flaticon.com/512/2311/2311904.png" },
-            5: { name: "Obesity", img: "https://cdn-icons-png.flaticon.com/512/9165/9165595.png" }
-        };
-
-        const result = statusMap[status] || statusMap[3];
-        
-        resDiv.style.display = 'block';
-        resDiv.className = `results status-${status}`;
-        sTitle.innerText = result.name;
-        sImg.src = result.img;
-        dText.innerHTML = `Referenced Data for: <strong>${weight}kg</strong> at <strong>${height}cm</strong>`;
-        
-        resDiv.scrollIntoView({behavior: 'smooth'});
     }
 </script>
 
